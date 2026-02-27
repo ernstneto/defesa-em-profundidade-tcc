@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>otp login verify</title>
+</head>
+<body>
+	<h1>Verificação de Dois Fatores</h1>
+	{% if messages %}
+	<ul>
+		{% for message in messages %}
+			<li style="color: red;"> {{ message }}</li>
+		{% endfor %}
+	</ul>
+	{% endif %}
+	<p>Por favor, insira o código gerado pelo seu aplicativo autenticador.</p>
+
+	<form method="post">
+		{% csrf_token %}
+		{{ form.as_p }}
+		<button type="submit">Verificar Código</button>
+	</form>
+	<p><a href="{% url 'accounts:login' %}">VOltar para o login</a></p>
+</body>
+</html>

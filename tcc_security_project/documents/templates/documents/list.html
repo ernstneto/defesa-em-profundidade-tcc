@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cofre de Evidências</title>
+    <style>
+        body { font-family: sans-serif; max-width: 900px; margin: 20px auto; padding: 20px; }
+        .nav { margin-bottom: 20px; }
+        .btn { padding: 8px 15px; text-decoration: none; border-radius: 4px; color: white; font-weight: bold; }
+        .btn-primary { background-color: #007bff; }
+        .btn-success { background-color: #28a745; }
+        .btn-danger { background-color: #dc3545; }
+        
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { padding: 12px; text-align: left; border-bottom: 1px solid #ddd; }
+        th { background-color: #f8f9fa; }
+        
+        .tag { padding: 4px 8px; border-radius: 12px; font-size: 0.85em; color: white; }
+        .tag-public { background-color: #17a2b8; }
+        .tag-internal { background-color: #6c757d; }
+        .tag-confidential { background-color: #dc3545; }
+    </style>
+</head>
+<body>
+    <div class="nav">
+        <a href="{% url 'dashboard' %}">← Voltar ao Dashboard</a>
+        <a href="{% url 'documents:upload' %}" class="btn btn-primary" style="float: right;">+ Nova Evidência</a>
+    </div>
+
+    <h1>📂 Repositório de Documentos Seguros</h1>
+    <p>Arquivos armazenados com criptografia em repouso e rastreabilidade ativa.</p>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Título</th>
+                <th>Classificação</th>
+                <th>Enviado Por</th>
+                <th>Data</th>
+                <th>Ação</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for doc in docs %}
+            <tr>
+                <td>
+                    <strong>{{ doc.title }}</strong><br>
+                    <small style="color: #666;">{{ doc.description|truncatechars:50 }}</small>
+                </td>
+                <td>
+                    {% if doc.classification == 'PUBLIC' %}
+                        <span class="tag tag-public">Público</span>
+                    {% elif doc.classification == 'INTERNAL' %}
+                        <span class="tag tag-internal">Interno</span>
+                    {% else %}
+                        <span class="tag tag-confidential">CONFIDENCIAL</span>
+                    {% endif %}
+                </td>
+                <td>{{ doc.uploaded_by.username }}</td>
+                <td>{{ doc.upload_at|date:"d/m/Y H:i" }}</td>
+                <td>
+                    <a href="{% url 'documents:download' doc.id %}" class="btn btn-success">⬇ Baixar</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="5" style="text-align: center; padding: 20px;">
+                    Nenhum documento encontrado.
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

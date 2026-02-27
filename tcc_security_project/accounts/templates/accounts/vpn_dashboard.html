@@ -1,0 +1,17 @@
+<div class="card">
+    <h2>📡 Status da Infraestrutura VPN</h2>
+    
+    {% if is_online %}
+        <div class="alert success">
+            <strong>🟢 ONLINE</strong><br>
+            Endereço Ativo: <code>{{ vpn_address }}</code><br>
+            <small>O arquivo de download abaixo será atualizado automaticamente com este endereço.</small>
+        </div>
+    {% else %}
+        <div class="alert error">
+            <strong>🔴 OFFLINE</strong><br>
+            O túnel de conexão não foi detectado. O download pode não funcionar externamente.
+        </div>
+    {% endif %}
+    
+    </div>

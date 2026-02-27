@@ -1,0 +1,53 @@
+# =========================
+# Segurança e Ambiente
+# =========================
+.env
+*.pem
+*.key
+.secret_key
+
+# =========================
+# Python
+# =========================
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# =========================
+# Ambientes Virtuais (Essencial bloquear)
+# =========================
+venv/
+env/
+.venv/
+Scripts/
+
+# =========================
+# Django e Banco de Dados
+# =========================
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+
+# =========================
+# Arquivos Estáticos e Uploads (HTML/CSS/JS)
+# =========================
+# Ignora a pasta gerada pelo comando 'collectstatic' em produção
+staticfiles/
+static_root/
+
+# Ignora uploads de usuários (imagens, documentos)
+media/
+media_root/
+
+# Ignora dependências de frontend (se você usar NPM para gerenciar bibliotecas CSS/JS)
+node_modules/
+
+# =========================
+# SO e IDEs
+# =========================
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

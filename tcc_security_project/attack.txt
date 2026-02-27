@@ -1,0 +1,6 @@
+attack models:
+Phishing #FORTE
+Credencial Stuffing #forte
+Pretexting and False Tecnical Support
+mitmproxy
+clickjacking - X-Frame-Options: DENY

@@ -1,0 +1,18 @@
+# --metrics define onde os dados estarão disponíveis localmente
+cloudflared tunnel --url http://localhost:80 --metrics localhost:20241
+
+curl http://localhost:20241/metrics
+
+O que você verá: Uma lista longa de dados técnicos. Isso é ouro para o seu TCC! Procure por linhas como:
+
+    cloudflared_tunnel_total_requests: Quantas requisições seu site recebeu.
+
+    cloudflared_tunnel_concurrent_requests: Quantas pessoas estão acessando agora.
+
+    cloudflared_tunnel_bytes_received: Dados que entraram.
+
+Como usar no TCC: Tire um print desse terminal cheio de dados.
+
+    Legenda da Imagem: "Monitoramento em tempo real da saúde do túnel criptografado via endpoint de métricas locais".
+
+    Explicação: "Foi implementada uma camada de observabilidade que permite auditar o volume de tráfego e a estabilidade da conexão sem expor esses dados para a internet pública."

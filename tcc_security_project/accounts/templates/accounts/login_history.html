@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Login History</title>
+	<style>
+		table {width: 100%; border-collapse: collapse; }
+		th, td {border: 1px solid #ddd; padding: 8px; text-align: left; }
+		th { background-color: #f2f2f2; }
+		.suspicious {background-color: #fff0f0; }
+	</style>
+</head>
+<body>
+	<nav>
+		<a href="{% url 'dashboard' %}">Votlar ao Dashboard</a>
+		<a href="{% url 'accounts:profile' user.id %}">Meu perfil</a>
+		<hr>
+	</nav>
+	<h1>Seu Histórico Recente de Login</h1>
+	<p>Revise seus últimos 10 acessos. Se voce não reconhecer alguma atividade, <a href="{% url 'accounts:password_reset' %}">altere sua senha</a> imediatamente.</p>
+	<table>
+		<thead>
+			<tr>
+				<th>Data e Hora</th>
+				<th>Endereço IP</th>
+				<th>Pais</th>
+				<th>Cidade</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for entry in login_history %}
+				<tr {% if not entry.country %}class="suspicious"{% endif %}>
+					<td>{{ entry.timestamp }}</td>
+					<td>{{ entry.ip_address }}</td>
+					<td>{{ entry.country|default:"N/A" }}</td>
+					<td>{{ entry.city|default:"N/A" }}</td>
+				</tr>
+			{% empty %}
+				<tr>
+					<td colspan="4">Nenhum historico de login encontrado.</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+</body>
+</html>

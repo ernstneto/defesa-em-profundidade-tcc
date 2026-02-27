@@ -1,0 +1,2 @@
+EMAIL_HOST_USER = 'ernstneto94@gmail.com'   # SEU E-MAIL
+EMAIL_HOST_PASSWORD = 'ecuz xgcc okdt ncpz'

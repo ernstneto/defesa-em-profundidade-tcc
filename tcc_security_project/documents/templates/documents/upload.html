@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Upload de Evidência</title>
+    <style>
+        body { font-family: sans-serif; max-width: 600px; margin: 20px auto; padding: 20px; background-color: #f9f9f9; }
+        .card { background-color: white; padding: 30px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        label { display: block; margin-top: 15px; font-weight: bold; }
+        input[type="text"], textarea, select, input[type="file"] { width: 100%; padding: 10px; margin-top: 5px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;}
+        button { margin-top: 20px; padding: 12px 20px; background-color: #28a745; color: white; border: none; border-radius: 4px; cursor: pointer; width: 100%; font-size: 16px;}
+        button:hover { background-color: #218838; }
+        .warning { background-color: #fff3cd; color: #856404; padding: 10px; border-radius: 4px; margin-bottom: 20px; border: 1px solid #ffeeba; }
+    </style>
+</head>
+<body>
+    <a href="{% url 'documents:list' %}">← Voltar para Lista</a>
+    
+    <div class="card">
+        <h1>🔐 Nova Evidência Digital</h1>
+        
+        <div class="warning">
+            <strong>Atenção:</strong> Arquivos marcados como <u>CONFIDENCIAL</u> serão criptografados e só poderão ser baixados via VPN segura.
+        </div>
+
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            
+            <label for="id_title">Título do Documento:</label>
+            {{ form.title }}
+
+            <label for="id_description">Descrição:</label>
+            {{ form.description }}
+
+            <label for="id_classification">Classificação de Sigilo:</label>
+            {{ form.classification }}
+
+            <label for="id_file">Arquivo:</label>
+            {{ form.file }}
+
+            <button type="submit">Criptografar e Salvar</button>
+        </form>
+        <div style="border: 1px dashed #ccc; padding: 15px; margin: 15px 0; border-radius: 5px;">
+                <h3 style="margin-top: 0; color: #555;">Opção A: Upload</h3>
+                <label for="id_file">Arquivo:</label>
+                {{ form.file }}
+            </div>
+
+            <div style="text-align: center; font-weight: bold; color: #888;">--- OU ---</div>
+
+            <div style="border: 1px dashed #ccc; padding: 15px; margin: 15px 0; border-radius: 5px;">
+                <h3 style="margin-top: 0; color: #555;">Opção B: Criar Agora</h3>
+                <label for="id_text_content">Conteúdo de Texto:</label>
+                {{ form.text_content }}
+            </div>
+
+            <button type="submit">Criptografar e Salvar</button>
+    </div>
+</body>
+</html>

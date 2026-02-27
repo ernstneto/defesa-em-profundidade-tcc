@@ -1,0 +1,3 @@
+abuse.ch/ThreatFox
+ET open/drop
+ET open/dshield

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Analisador de Segurança</title>
+    <style>
+        /* Estilos básicos para ficar apresentável */
+        body { font-family: sans-serif; max-width: 800px; margin: 20px auto; padding: 20px; background-color: #f8f9fa; }
+        .container { background-color: #fff; padding: 30px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        h1 { color: #d9534f; } /* Cor vermelha para destacar segurança */
+        label { font-weight: bold; display: block; margin-top: 15px; }
+        select, textarea { width: 100%; padding: 10px; border: 1px solid #ced4da; border-radius: 4px; font-family: monospace; }
+        textarea { height: 120px; }
+        button { margin-top: 20px; padding: 12px 25px; background-color: #0d6efd; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 16px; }
+        button:hover { background-color: #0b5ed7; }
+        .result { margin-top: 30px; padding: 20px; background-color: #e9ecef; border-left: 5px solid #6c757d; white-space: pre-wrap; }
+        .nav { margin-bottom: 20px; }
+        .nav a { text-decoration: none; color: #6c757d; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="nav">
+            <a href="{% url 'dashboard' %}">← Voltar ao Dashboard</a>
+        </div>
+
+        <h1>🛡️ Centro de Inteligência de Ameaças</h1>
+        <p>Use nossa IA especializada para analisar suspeitas de fraude.</p>
+
+        <form method="post">
+            {% csrf_token %}
+            
+            <div>
+                <label for="analysis_type">Tipo de Análise:</label>
+                <select name="analysis_type" id="analysis_type">
+                    <option value="general" {% if current_type == 'general' %}selected{% endif %}>🔍 Mensagem Completa (E-mail / SMS / Zap)</option>
+                    <option value="url" {% if current_type == 'url' %}selected{% endif %}>🔗 Apenas um Link (URL)</option>
+                    <option value="email_addr" {% if current_type == 'email_addr' %}selected{% endif %}>📧 Apenas Endereço de E-mail</option>
+                </select>
+            </div>
+
+            <div>
+                <label for="user_text">Cole o conteúdo suspeito aqui:</label>
+                <textarea name="user_text" id="user_text" required placeholder="Ex: O texto do golpe, o link estranho, ou o remetente...">{{ user_text }}</textarea>
+            </div>
+
+            <button type="submit">Executar Análise Avançada</button>
+        </form>
+
+        {% if analysis_result %}
+            <div class="result">
+                <h2>📊 Relatório da Análise:</h2>
+                {{ analysis_result }}
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>

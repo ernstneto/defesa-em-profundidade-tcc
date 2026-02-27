@@ -1,0 +1,19 @@
+#relatorio
+sqlmap no comments/views.py raw() VS filter()
+XSS com beeceptor para captar dados {%end%} |safe VS without
+
+-------------------Relembrando--------------------------
+Construiu uma aplicação com vulnerabilidades intencionais (SQLi e XSS).
+
+Atacou a falha de SQL Injection com uma ferramenta profissional (sqlmap).
+
+Atacou a falha de XSS, simulando um roubo de sessão.
+
+Corrigiu ambas as vulnerabilidades no código.
+
+Verificou que os mesmos ataques agora falham.
+
+Este ciclo completo de "exploit-patch-verify" é a essência do trabalho de segurança de aplicações e é um material extremamente sólido para o seu projeto.
+
+-Ngnix funcionando ./search/ com sucesso. implementacao interna feita antes de implementar alternativas mais sofisticadas como pfsense, opensense ou outra atribuicao.
+

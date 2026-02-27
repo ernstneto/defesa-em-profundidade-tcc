@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="card">
+    <h2>🔒 Verificador de Integridade SSL</h2>
+    <form method="post">
+        {% csrf_token %}
+        <label>Domínio para verificar:</label>
+        <input type="text" name="target_url" placeholder="ex: google.com" value="{{ target_url }}">
+        <button type="submit">Verificar Certificado Real</button>
+    </form>
+
+    {% if result.status == 'success' %}
+        <div style="margin-top: 20px; padding: 15px; border: 1px solid green; background: #e6fffa;">
+            <h3>✅ Certificado Autêntico (Visão do Servidor)</h3>
+            <p><strong>Domínio:</strong> {{ result.domain }}</p>
+            <p><strong>Emissor:</strong> {{ result.issuer }}</p>
+            <p><strong>Fingerprint (SHA-256):</strong><br>
+            <code style="word-break: break-all;">{{ result.fingerprint }}</code></p>
+        </div>
+    {% elif result.status == 'error' %}
+        <div class="alert error">{{ result.message }}</div>
+    {% endif %}
+</div>
+{% endblock %}

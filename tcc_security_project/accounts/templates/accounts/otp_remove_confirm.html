@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Confirmer Remoção de Dispositivo</title>
+</head>
+<body>
+	<nav> 
+		<a ref="{% url 'accounts:otp_manage' %}">Cancelar e Voltar</a>
+		<hr>
+	</nav>
+	<h1>Confirmar Remoção</h1>
+	<p>Voce tem certeza que deseja remover o dispositivo de autenticação "{{ device.name }}?"</p>
+	<form method="post">
+		{% csrf_token %}
+		<button>Sim, Remover</button>
+		<a href="{% url 'accounts:otp_manage' %}">Cancelar</a>
+	</form>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Perfil de {{ profile_user.username }}</title>
+</head>
+<body>
+    <nav>
+        <a href="{% url 'dashboard' %}">Voltar ao Dashboard</a> | 
+        <a href="{% url 'accounts:mydata' %}">Ver dados de conexão</a>
+        <hr>
+    </nav>
+    <!--
+    <h1>Perfil de: {{ profile_user.username }}</h1>
+    <p><strong>ID do Usuário:</strong> {{ profile_user.id }}</p>
+
+    {% if user.id == profile_user.id %}
+        <p><strong>E-mail (Visível apenas para você):</strong> {{ profile_user.email }}</p>
+        <p><a href="{% url 'accounts:otp_manage' %}">Gerenciar Autenticação de Dois Fatores</a></p>
+    {% else %}
+        <p><i>(E-mail oculto para outros usuários)</i></p>
+    {% endif %}
+    <hr>
+    -->
+    <h1>Perfil de: {{ profile_user.username }}</h1>
+    {% if user.id == profile_user.id %}
+        <p>
+        <a href="{% url 'accounts:profile_edit' %}">Editar Perfil</a> | 
+        <a href="{% url 'accounts:password_reset' %}">Alterar Senha</a> |
+        <a href="{% url 'accounts:otp_manage' %}">Gerenciar 2FA</a> |
+        <a href="{% url 'accounts:login_history' %}">Ver Histórico de Login</a>
+        </p>
+
+    {% endif %}
+    <p><strong>ID do Usuário:</strong>  {{ profile_user.id }}</p>
+    {% if user.id == profile_user.id %}
+        <p><strong>E-mail (Visivel apenas para voce):</strong> {{ profile_user.email }}
+    {% else %}
+        <p><i>(E-mail oculto para outros usuários)</i></p>
+    {% endif %}
+    </body>
+    <hr>
+    {# Verifica se o usuario tem uma configuração de VPN associada #}
+    {% if user.vpn_config and user.vpn_config.is_active %}
+        <h3>Acesso Remoto Seguro (VPN)</h3>
+        <div style="background-color: #e8f5e9; padding: 15px; border-radius: 5px; border: 1px solid #4caf50;">
+            <p><strong>Status:</strong> <span style="color: green;">Habilitado</span></p>
+            <p>Você possui permissão para acessar a rede interna via VPN.</p>
+            <a href="{% url 'accounts:download_vpn' %}" class="button" style="background-color: #007bff; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">
+                ⬇️ Baixar Minha Configuração (.ovpn)
+            </a>
+        </div>
+    {% else %}
+        <div style="background-color: #f8f9fa; padding: 15px; border-radius: 5px; border: 1px solid #dee2e6;">
+            <p><strong>Status:</strong> Não Habilitado</p>
+            <p>Você não possui acesso VPN ou seu nível de permissão é insuficiente.</p>
+        </div>
+    {% endif %}
+</html>

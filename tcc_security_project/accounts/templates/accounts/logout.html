@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Logout</title>
+</head>
+<body>
+	<nav>
+		{% if user.is_authenticated %}
+			<p>Olá, {{ user.username }}!</p>
+			<form action="{% url 'accounts:logout' %}" method="post">
+				{% csrf_token %}
+				<button type="submit">Logout</button>
+			</form>
+		{% endif %}
+		{% else %}
+			<a href="{% url 'accounts:login' %}">Login</a>
+			<a href="{% url 'accounts:register' %}">Registrar</a>
+		{% endif %}
+	</nav>
+	<hr>
+	<h1>Comentários</h1>
+	
+</body>
+</html>

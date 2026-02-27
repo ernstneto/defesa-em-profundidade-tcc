@@ -1,0 +1,15 @@
+django>=4.0,<5.0
+psycopg2-binary
+requests
+django-otp
+qrcode[pil]
+colorlog
+google-generativeai
+django-admin-rangefilter
+geoip2
+python-dotenv
+djangorestframework
+django-cors-headers
+cryptography
+pypdf
+reportlab

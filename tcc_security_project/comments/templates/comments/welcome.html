@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Welcome</title>
+</head>
+<body>
+	<h1>Bem-vindo ao Projeto de Segurança</h1>
+	<p>Por favor, faça login ou registre-se para continuar.</p>
+	<a href="{% url 'accounts:login' %}">Fazer Login</a>
+	<br>
+	<a href="{% url 'accounts:register' %}">Criar Conta</a>
+</body>
+</html>

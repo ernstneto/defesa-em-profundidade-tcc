@@ -1,0 +1,16 @@
+Assunto: ALERTA DE SEGURANÇA: Solicitação de Mudança de E-mail
+
+Olá, {{ user.username }},
+
+Recebemos uma solicitação para alterar o e-mail associado à sua conta em {{ domain }}.
+
+O novo e-mail solicitado é: {{ new_email }}
+
+Se esta solicitação foi feita por você, por favor, verifique a caixa de entrada do seu novo e-mail para encontrar o link de confirmação.
+
+Se esta solicitação NÃO foi feita por você, sua conta pode estar comprometida. Recomendamos que você acesse sua conta imediatamente e altere sua senha.
+
+(Em uma implementação futura, um link para "Cancelar esta solicitação" seria incluído aqui.)
+
+Atenciosamente,
+Equipe de Segurança do Projeto TCC

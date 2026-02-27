@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Alterar Endereço de E-mail</title>
+</head>
+<body>
+	<nav>
+		<a href="{% url 'accounts:profile' user.id %}">Voltar ao Perfil</a>
+		<hr>
+	</nav>
+
+	<h1>Solicitar Mudança de E-mail</h1>
+	<p>Seu e-mail atual é: <strong>{{ user.email }}</strong></p>
+	<p>Por razões de segurança, ao solicitar a alteração, um e-mail de confirmação será enviado para o <strong>novo</strong> endereço, e um alerta de segurança será enviado para o seu endereço <string>antigo</string>.</p>
+
+	{% if form.errors %}
+		<div style="color=red;">
+			<p><strong>Não foi possível processar sua solicitação:</strong></p>
+			<ul>
+				{% for field, error in form.erros.items %}
+					{% for error in errors %}
+						<li>{{ error }}</li>
+					{% endfor %}
+				{% endfor %}
+			</ul>
+		</div>
+
+	{% endif %}
+
+	<form method="post">
+		{% csrf_token %}
+		{{ form.as_p }}
+		<button type="submit">Enviar E-mail de COnfirmação</button>
+	</form>
+</body>
+</html>

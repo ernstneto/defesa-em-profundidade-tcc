@@ -1,0 +1,95 @@
+
+services:
+  nginx:
+    image: nginx:1.21
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+      - ./nginx/ssl:/etc/nginx/ssl
+    ports:
+      - "8000:80"
+      - "8443:8443"
+    depends_on:
+      web:
+        condition: service_started
+
+  web:
+    build: .
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/app
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      - .env
+    restart: always
+  db:
+    image: postgres:14
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_DB=${DB_NAME}
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+    env_file:
+      - .env
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U tcc_user -d tcc_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  #wireguard:
+    #image: linuxserver/wireguard
+    #container_name: wireguard
+    #cap_add:
+      #- NET_ADMIN
+      #- SYS_MODULE
+    #environment:
+      #- PUID=1000
+      #- PGID=1000
+      #- TZ=America/Sao_Paulo
+      #- SERVERURL=auto
+      #- PEERS=2
+    #volumes:
+      #- ./wireguard_config:/config
+      #- /lib/modules:/lib/modules
+    #ports:
+      #- "51820:51820/udp"
+    #sysctls:
+      #- net.ipv4.ip_forward=1
+    #restart: unless-stopped
+  # --- MONITORAMENTO (PLG STACK) ---
+  
+  loki:
+    image: grafana/loki:3.0.0
+    command: -config.file=/etc/loki/local-config.yaml
+    ports:
+      - "3100:3100"
+    restart: unless-stopped
+
+  promtail:
+    image: grafana/promtail:3.0.0
+    volumes:
+      - ./monitoring/promtail-config.yaml:/etc/promtail/config.yaml
+      - /var/run/docker.sock:/var/run/docker.sock
+    command: -config.file=/etc/promtail/config.yaml
+    depends_on:
+      - loki
+    restart: unless-stopped
+
+  grafana:
+    image: grafana/grafana:latest
+    ports:
+      - "3000:3000" # Porta de acesso ao Painel
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+    depends_on:
+      - loki
+    restart: unless-stopped
+
+volumes:
+  postgres_data:

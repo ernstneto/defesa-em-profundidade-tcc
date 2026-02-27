@@ -1,0 +1,14 @@
+docker compose exec web python manage.py shell
+from accounts.models import BlockedIP
+
+# Opcional: veja quais IPs estão bloqueados
+print(BlockedIP.objects.all())
+
+# APAGA TODOS OS IPs da blacklist
+BlockedIP.objects.all().delete()
+
+# Opcional: Confirma que a tabela está vazia
+print(BlockedIP.objects.count())
+
+# Sai do shell
+exit()

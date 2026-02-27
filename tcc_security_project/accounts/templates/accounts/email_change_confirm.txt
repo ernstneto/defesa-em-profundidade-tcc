@@ -1,0 +1,12 @@
+Olá, {{ user.username }},
+
+Você solicitou a alteração do seu e-mail para este endereço ({{ new_email }}).
+
+Para confirmar esta mudança, por favor, clique no link abaixo:
+
+{{ protocol }}://{{ domain }}{% url 'accounts:email_change_confirm' token=token %}
+
+Se você não solicitou esta mudança, ignore este e-mail.
+
+Atenciosamente,
+Equipe de Segurança

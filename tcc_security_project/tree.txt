@@ -1,0 +1,36 @@
+.
+├── app
+│   ├── asgi.py
+│   ├── __init__.py
+│   ├── settings.py
+│   ├── urls.py
+│   └── wsgi.py
+├── comments
+│   ├── admin.py
+│   ├── apps.py
+│   ├── __init__.py
+│   ├── middleware.py
+│   ├── migrations
+│   │   ├── 0001_initial.py
+│   │   └── __init__.py
+│   ├── models.py
+│   ├── templates
+│   │   └── comments
+│   │       ├── comment_list.html
+│   │       ├── search_result_direct.html
+│   │       └── search_results.html
+│   ├── tests.py
+│   ├── urls.py
+│   └── views.py
+├── docker-compose.yml
+├── Dockerfile
+├── manage.py
+├── minimal_flask_app.py
+├── nginx
+│   └── nginx.conf
+├── relatorio.txt
+├── requirements.txt
+├── status.txt
+└── tree.txt
+
+7 directories, 27 files

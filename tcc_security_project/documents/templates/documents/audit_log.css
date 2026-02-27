@@ -1,0 +1,27 @@
+body {
+	font-family: monospace;
+	padding: 20px;
+	background-color: #f0f0f0;
+}
+
+table {
+	width: 100%;
+	border-collapse: collapse;
+	background: white;
+	box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+th {
+	background-color: #333;
+	color: white;
+}
+
+.success {
+	color: green;
+	font-weight: bold;
+}
+
+.fail {
+	color: red;
+	font-weight: bold;
+}

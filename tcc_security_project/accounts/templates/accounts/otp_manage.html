@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Gerenciar Autenticação de Dois Fatores (2FA)</title>
+</head>
+<body>
+	<nav>
+		<a href="{% url 'dashboard' %}">Voltar ao Dashboard</a> |
+		<a href="{% url 'accounts:profile' user.id %}">Meu Perfil</a> |
+		<a href="{% url 'accounts:mydata' %}">Ver Dados de Conexão</a>
+	</nav>
+	<h1>Gerenciar Autenticação de Dois Fatores (TOTP)</h1>
+	{% if messages %}
+		<ul>
+			{% for message in messages %}
+				<li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+			{% endfor %}
+		</ul>
+	{% endif %}
+
+	<h2>Seus Dispositivos Registrados:</h2>
+	{% if devices %}
+		<ul>
+			{% for device in devices %}
+				<li>
+					{{ device.name }} (Confirmado: {{ device.confirmed }})
+					- <a href="{% url 'accounts:otp_remove' device.id %}">Remover</a>
+				</li>
+			{% empty %}
+				<p>Nenhum dispositivo registrado.</p>
+			{% endfor %}
+		</ul>
+	{% endif %}
+	<hr>
+	<a href="{% url 'accounts:otp_setup' %}">Adicionar Novo Dispositivo Autenticador</a>
+</body>
+</html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Test search results</title>
+</head>
+<body>
+	<h1>Resultados da Busca</h1>
+	<form method="get">
+		<input type="text" name='q' placeholder="Buscar por author">
+		<button type="submit">Buscar</button>
+	</form>
+
+	{% for comment in comments %}
+		<p>{{ comment.author|safe }}: {{ comment.text|safe }}</p>
+	{% empty %}
+		<p>Nenhum comentário encontrado</p>
+	{% endfor %}
+</body>
+</html>

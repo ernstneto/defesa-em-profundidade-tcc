@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Test comment</title>
+</head>
+<body>
+	{% if user.is_authenticated %}
+	<div style="display: flex; justify-content: space-between; align-items: center;">
+        {% if user.is_authenticated %}
+            <p>Olá, {{ user.username }}!</p>
+            <a href="{% url 'accounts:profile' user.id%}">Meu Perfil</a>
+            <a href="{% url 'accounts:mydata' %}">Ver meus dados de conexão</a>
+            <form action="{% url 'accounts:logout' %}" method="post">
+                {% csrf_token %}
+                <button type="submit">Logout (Sair)</button>
+            </form>
+        {% endif %}
+    </div>
+	{% endif %}
+	<h1>Comentarios</h1>
+	{% for comment in comments %}
+		<div>
+			<p><strong>{{ comment.author }}</strong> disse:</p>
+			
+			<!--<p>{{ comment.text|safe }}</p>-->
+			<p>{{ comment.text}}</p>
+		</div>
+	<hr>
+	{% endfor %}
+	<h2>Deixe um comentário</h2>
+	<form method="post">
+		{% csrf_token %}
+		<input type='text' name='author' placeholder='seu nome'><br>
+		<textarea name='text' placeholder='Seu comentário'></textarea><br>
+		<button type='submit'>Enviar</button><br>
+	</form>
+	<hr>
+	{% if messages %}
+		<div style="padding: 15px; background-color: #ffdddd; border-left: 6px solid #f44336; margin-botton: 15px;">
+				{% for message in messages %}
+					<li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+				{% endfor %}
+		</div>
+	{% endif %}
+	<br>
+	<a href="{% url 'accounts:security_check' %}">🛡️ Analisador de Segurança  </a>
+	<a href="{% url 'accounts:finance_security_check' %}">💰 Auditor Financeiro  </a>
+	<a href="{% url 'documents:list' %}" style="color: #d9534f; font-weight: bold;">🗄️ Arquivos Seguros (ForensicVault)</a>
+	<a href="{% url 'accounts:vpn_dashboard' %}">🔌 Conexão VPN</a>
+</body>
+</html>

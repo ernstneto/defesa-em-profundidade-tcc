@@ -1,0 +1,57 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>{% block title %}ForensicVault - TCC Security{% endblock %}</title>
+	<link rel="stylesheet" href="{% static 'css/style.css' %}">
+	<link href="https:?/fonts.googleapis.com/css2?family=Inter:wgt@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+	<nav class="sidebar">
+		<div class="sidebar-header">
+			🛡️ ForensicVault
+		</div>
+		<ul class="sidebar-menu">
+			{% if user.is_authenticated %}
+			<li><a href="{% url 'dashboard' %}">📊 Dashboard</a></li>
+			<li><a href="{% url 'documents:list' %}">🗄️ Arquivos Seguros</a></li>
+			<li><a href="{% url 'accounts:security_check' %}">🦠 Analisador de IA</a></li>
+			<li><a href="{% url 'accounts:finance_security_check' %}">💰 Auditor Financeiro</a></li>
+			<li><a href="{% url 'accounts:vpn_dashboard' %}">🔌 Conexão VPN</a></li>
+			<li><a href="{% url 'accounts:profile' user.id %}">👤 Meu Perfil</a></li>
+			<li><a href="{% url 'accounts:otp_manage' %}">🔐 Configurar 2FA</a></li>
+			<li style="margin-top: 20px; border-top: 1px solid rgba(255,255,255,0.1);">
+				<form action="{% url 'accounts:logout' %}" method="post" style="padding: 0;">
+					{% csrf_token %}
+					<button type="submit" style="background:none; border:none; color: #94a3b8; width:100%; text-align:left; padding: 15px 25px; cursor:pointer;">🚪 Sair</button>
+				</form>
+			</li>
+			{% else %}
+				<li><a href="{% url 'accounts:login' %}">🔑 Entrar</a></li>
+				<li><a href="{% url 'accounts:register' %}">📝 Cadastrar</a></li>
+			{% endif %}
+		</ul>		
+	</nav>
+
+	<main class="main-content">
+		{% if messages %}
+			{% for message in messages %}
+				<div class="alert {{ message.tags }}">
+					{{ message }}
+				</div>
+			{% endfor %}
+		{% endif %}
+
+		{% block content %}
+		{% endblock %}
+	</main>
+	<script>
+		setTimeout(function() {
+			const alerts = document.querySelectorAll('.alert');
+			alerts.forEach(alert => alert.style.display = 'none');
+		}, 5000);
+	</script>
+</body>
+</html>

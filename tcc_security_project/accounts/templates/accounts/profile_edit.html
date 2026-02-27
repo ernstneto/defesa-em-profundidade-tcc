@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Profile Edit</title>
+</head>
+<body>
+	<nav>
+		<a href="{% url 'accounts:profile' user.id %}">Cancelar e Voltar ao Perfil</a>
+		<hr>
+	</nav>
+	<p>
+		<strong>Ações de segurança:</strong><br>
+		<a href="{% url 'accounts:email_change_request' %}">Alterar meu endereço de email</a>
+	</p>
+	<h1>Profile Edit</h1>
+	{% if messages %}
+		<ul>
+			{% for message in messages %}
+				<li {% if messages.tags %} class="{{ messages.tags }}" {% endif %}>{{ message }}</li>
+			{% endfor %}
+		</ul>
+	{% endif %}
+	<form method="post">
+		{% csrf_token %}
+		{{ form.as_p }}
+		<button type="submit">Salvar Alterações</button>
+	</form>
+</body>
+</html>
